@@ -1,0 +1,60 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: Roboto, sans-serif;
+  letter-spacing: 0.03em;
+  font-size: 14px;
+  line-height: 1.71;
+}
+
+.wrap {
+  width: 400px;
+  margin: 50px auto;
+}
+
+form {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.todo-input {
+  display: inline-block;
+}
+
+.create,
+.set-status {
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+.list-item {
+  display: flex;
+  border-radius: 60px 3px 3px 60px;
+}
+
+.list-item:not(last-child) {
+  padding-left: 15px;
+  margin-top: 2px;
+}
+
+.done {
+  background-color: rgb(43, 255, 0);
+}
+
+.must-done {
+  background-color: rgb(255, 255, 0);
+}
