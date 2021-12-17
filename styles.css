@@ -51,10 +51,10 @@ ul {
   margin-top: 2px;
 }
 
-.done {
-  background-color: rgb(43, 255, 0);
-}
-
 .must-done {
   background-color: rgb(255, 255, 0);
+}
+
+.done {
+  background-color: rgb(43, 255, 0);
 }

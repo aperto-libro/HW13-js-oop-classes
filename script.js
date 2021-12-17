@@ -8,7 +8,6 @@ class TodoList {
   }
 
   buttonClick(event) {
-    event.preventDefault();
     let target = event.target;
     let todoId = target.closest('li').dataset.id;
 
@@ -28,6 +27,7 @@ class TodoList {
     this.todos = this.todos.filter((el) => {
       return el.id !== id;
     });
+
     let todoToRemove = document.querySelector(`[data-id="${id}"]`);
     todoToRemove.remove();
   }
@@ -45,17 +45,11 @@ class TodoList {
     let todoToChangeStatus = document.querySelector(`[data-id="${id}"]`);
 
     this.todos[index].status = !this.todos[index].status;
-    this.changeTodoColor(index, todoToChangeStatus);
+    this.changeTodoColor(todoToChangeStatus);
   }
 
-  changeTodoColor(index, todoId) {
-    if (this.todos[index].status) {
-      todoId.classList.add('done');
-      todoId.classList.remove('must-done');
-    } else if (!this.todos[index].status) {
-      todoId.classList.remove('done');
-      todoId.classList.add('must-done');
-    }
+  changeTodoColor(el) {
+    el.classList.toggle('done');
   }
 
   findTodos(data) {
@@ -71,8 +65,10 @@ class TodoList {
       if (!el) {
         return;
       }
-      let statusIsDone = el.status ? 'done' : 'must-done';
-      list += `<li class="list-item ${statusIsDone}" data-id="${el.id}">${el.value}<button class="set-status">Change status</button><button class="delete-task">Delete</button></li>`;
+      list += `<li class="list-item must-done ${el.status ? 'done' : 'must-done'}" data-id="${
+        el.id
+      }">${el.value}
+      <button class="set-status">Change status</button><button class="delete-task">Delete</button></li>`;
     }
     this.el.innerHTML = list;
   }
@@ -88,8 +84,8 @@ class Task {
 
 let list = document.getElementById('list');
 let todo1 = new TodoList(list);
-todo1.addTodo(new Task('Сделать зарядку', true));
-todo1.addTodo(new Task('Купить хлебушка', true));
+todo1.addTodo(new Task('Сделать зарядку', false));
+todo1.addTodo(new Task('Купить хлебушка', false));
 todo1.addTodo(new Task('Выполнить ДЗ!!!', false));
 todo1.render();
 
@@ -97,16 +93,14 @@ const input = document.querySelector('.todo-input');
 const createButton = document.querySelector('#create-todo');
 const findButton = document.querySelector('#find-todo');
 
-createButton.addEventListener('click', function (event) {
-  event.preventDefault();
+createButton.addEventListener('click', () => {
   if (input.value) {
     todo1.addTodo(new Task(input.value), false);
   }
   input.value = '';
 });
 
-findButton.addEventListener('click', function (event) {
-  event.preventDefault();
+findButton.addEventListener('click', () => {
   if (input.value) {
     todo1.findTodos(input.value);
   }
