@@ -3,11 +3,11 @@ class TodoList {
     this.todos = [];
     this.el = el;
     this.el.addEventListener('click', (event) => {
-      this.buttonClick(event);
+      this.todoEventHandler(event);
     });
   }
 
-  buttonClick(event) {
+  todoEventHandler(event) {
     let target = event.target;
     let todoId = target.closest('li').dataset.id;
 
@@ -104,5 +104,4 @@ findButton.addEventListener('click', () => {
   if (input.value) {
     todo1.findTodos(input.value);
   }
-  input.value = '';
 });
